@@ -1,2 +1,2 @@
 # STAT-651-Project-DRW
-Repository for the STAT 651 final project
+Repository for our STAT 651 final project documents on Dependent Random Weighting
