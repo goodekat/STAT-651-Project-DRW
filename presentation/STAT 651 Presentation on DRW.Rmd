@@ -1,0 +1,29 @@
+---
+title: "Dependent Random Weighting"
+author: "Katherine Goode and Shan Yu"
+date: "05/04/2018"
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+...
+
+## Irregular Time Series Data
+...
+
+## Background of Bootstrapping with Irregular Data
+...
+
+## Dependent Random Weighting
+...
+
+## Simulation
+...
