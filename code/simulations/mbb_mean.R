@@ -4,14 +4,13 @@
 # Source in the moving block bootstrap sample function
 source("./code/functions/mbbsample.R")
 
-# Load in the data
-data_AR_lambda18 <- read.csv("./data/data_AR_lambda18.csv")
-data_AR_lambda36 <- read.csv("./data/data_AR_lambda36.csv")
-data_MA_lambda18 <- read.csv("./data/data_MA_lambda18.csv")
-data_MA_lambda36 <- read.csv("./data/data_MA_lambda36.csv")
+# Set a seed
+set.seed(200)
+
+
 
 # Number of Monte Carlo replicates
-M <- 1000
+M <- 2000
 
 # Number of bootstrap samples
 K <- 1000
@@ -22,17 +21,25 @@ res <- numeric(M)
 
 # Perform the simulation for the mean
 for (j in 1:M){
+  
+  # Set seed
+  set.seed(j)
+  
+  # Generate the irregular data
+  dataMA <- genMA_irr(n = 400, parm = c(-1, 0.7))
+  
   xbar <- numeric(K)
+  med <- numeric(K)
   
   for (i in 1:K) {
-    sample <- mbbsample(data = data_AR_lambda18$x, b = 10)
+    sample <- mbbsample(data = dataMA$X, b = 10)
     xbar[i] <- mean(sample)
-  
-    
+    med[i] <- median(sample)
   }
-  
-  var[j] <- var(xbar)
-  res[j] <- quantile(xbar[j], probs = 0.025) <= 0 & 0 <= quantile(xbar[j]), probs = 0.975)
+  mean_var[j] <- var(xbar)
+  mean_res[j] <- quantile(xbar[j], probs = 0.025) <= 0 & 0 <= quantile(xbar[j]), probs = 0.975)
+  mean_var[j] <- var(med)
+  mean_res[j] <- quantile(xbar[j], probs = 0.025) <= -0. & 0 <= quantile(xbar[j]), probs = 0.975)
 }
 
 # Proportion of times 0 falls in the 95% bootstrap confidence interval
