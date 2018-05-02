@@ -1,7 +1,7 @@
 ## STAT 651 FINAL PROJECT - DEPENDENT RANDOM WEIGHTING
 ## Function for obtaining a block bootstrap sample
 
-bbsample <- function(data, b){
+mbbsample <- function(data, b){
   
   ## data: the time series as a vector
   ## b: the integer block length
