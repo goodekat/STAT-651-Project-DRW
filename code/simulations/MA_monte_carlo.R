@@ -4,13 +4,16 @@
 ## (with no missing observations)
 
 # Set the number of Monte Carlo simulations
-M <- 10000
+M <- 100000
 
 # Create empty vectors for saving the means and medians
 means <- numeric(M)
 medians <- numeric(M)
 
 for(i in 1:M){
+  
+  # Set seed
+  set.seed(i)
   
   # Generate the regular MA data
   dataMA <- genMA(n = 400, parm = c(-1, 0.7))
@@ -24,9 +27,10 @@ for(i in 1:M){
 # Monte Carlo approximations to the mean and median of 
 # the MA time series
 mean(means)
-mean(medians)
+mean(medians) # -0.188
 
 # Monte Carlo approximations to the variance of the mean
 # and median of the MA time series
-var(means)
-var(medians)
+var(means)   # 0.002
+var(medians) # 0.004
+
