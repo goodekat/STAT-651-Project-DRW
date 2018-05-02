@@ -3,6 +3,9 @@
 ## variance of the mean and median of the MA time series 
 ## (with no missing observations)
 
+# Source in code for generating a MA time series
+source("./code/functions/genMA.R")
+
 # Set the number of Monte Carlo simulations
 M <- 100000
 
