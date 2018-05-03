@@ -4,14 +4,14 @@
 # library needed library
 library('MASS')
 
-DRW_bootstrap=function(X,l=5){
+DRW_bootstrap=function(X,t,l=5,D){
   # sample size
   n=length(X)
   
-  # calucate (i-j)/d
-  I=matrix(rep(1:n,n),ncol=n)
-  J=matrix(rep(1:n,each=n),ncol=n)
-  D=(I-J)/l
+  # calucate (t_i-t_j)/d
+  I <- matrix(rep(t,n),ncol=n)
+  J <- matrix(rep(t,each=n),ncol=n)
+  D <- (I-J)/l
   
   # evaluate using bartlett window function
   K=1-abs(D)
@@ -20,8 +20,5 @@ DRW_bootstrap=function(X,l=5){
   # generate Y(t), Z(t) and W(t) in the paper
   Y=mvrnorm(n=1,mu=rep(0,n),Sigma=K)
   Z=(Y+sqrt(1+sqrt(2)))^2
-  W=Z/sum(Z)
-  
-  # generate bootstrap sample with weighted probability
-  sample(X,replace=TRUE,prob=W)
+  Z/sum(Z)
 }
