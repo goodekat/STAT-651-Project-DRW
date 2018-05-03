@@ -72,4 +72,3 @@ mbbMAsim <- function(n, M, K, b){
   return(results)
   
 }
-
