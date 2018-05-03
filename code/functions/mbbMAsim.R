@@ -1,12 +1,14 @@
 ## STAT 651 FINAL PROJECT - DEPENDENT RANDOM WEIGHTING
-## Function for moving block boostrap simulation for the mean and median
+## Function for moving block boostrap simulation for the 
+## mean and median with MA time series data
 
-mbbsim <- function(n, M, K, b, parm){
+mbbMAsim <- function(n, M, K, b){
   
   # Inputs
   # n: sample size for time series with no missing data
   # M: number of Monte Carlo replicates
   # K: number of bootstrap samples
+  # b: number of blocks
   
   # Source in the moving block bootstrap sample function
   source("./code/functions/mbbsample.R")
@@ -19,6 +21,9 @@ mbbsim <- function(n, M, K, b, parm){
   median_var <- numeric(M)
   median_res <- numeric(M)
   
+  # Create an empty vector to store the length of the data
+  nj <- numeric(M)
+  
   # Perform the simulation for the mean
   for (j in 1:M){
     
@@ -28,7 +33,10 @@ mbbsim <- function(n, M, K, b, parm){
     # Generate an irregular data sample
     dataMA <- genMAirr(n = n, parm = c(-1, 0.7))
     
-    # Create empty vectors 
+    # Save the length of the data
+    nj[j] <- length(dataMA$X)
+    
+    # Create empty vectors
     xbar <- numeric(K)
     med <- numeric(K)
     
@@ -53,16 +61,13 @@ mbbsim <- function(n, M, K, b, parm){
   # the mean and median
   results <- data.frame(coverage_mean = sum(mean_res) / M,
                         coverage_median = sum(median_res) / M,
-                        MSE_mean = (1 / M) * sum((((400 * mean_var) / (400 * 0.002)) - 1)^2),
-                        MSE_median = (1 / M) * sum((((400 * median_var) / (400 * 0.004)) - 1)^2))
+                        MSE_mean = (1 / M) * sum((mean_var - 0.002)^2),
+                        MSE_median = (1 / M) * sum(median_var - 0.004)^2,
+                        norm_MSE_mean = (1 / M) * sum((((nj * mean_var) / (400 * 0.002)) - 1)^2),
+                        norm_MSE_median = (1 / M) * sum((((nj * median_var) / (400 * 0.004)) - 1)^2))
   
   # Return the data frame of results
   return(results)
   
-}  
-
-
-
-
-
+}
 
