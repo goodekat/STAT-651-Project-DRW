@@ -1,7 +1,7 @@
 ## STAT 651 FINAL PROJECT - DEPENDENT RANDOM WEIGHTING
 ## Code for computing Monte Carlo approximation to the 
-## variance of the mean and median of the MA time series 
-## (with no missing observations)
+## variance of the mean and median of the MA and the AR
+## time series (with no missing observations)
 
 # Set the number of Monte Carlo simulations
 M <- 100000
