@@ -16,21 +16,21 @@ source("./code/functions/mbbARsim.R")
 
 # MA simulation with 500 Monte Carlo replicates and save the time
 start_time <- Sys.time()
-resMA <- lapply(1:10, FUN = mbbMAsim, n = 400, M = 500, K = 1000)
+resMAmbb <- lapply(1:10, FUN = mbbMAsim, n = 400, M = 500, K = 1000)
 end_time <- Sys.time()
 timeMA <- end_time - start_time
 
 # Convert the results into a dataframe
-resMA <- plyr::ldply(resMA, data.frame)
+resMAmbb <- plyr::ldply(resMAmbb, data.frame)
 
 # Add a variable for blocksize
-resMA$blocksize <- 1:10
+resMAmbb$blocksize <- 1:10
 
 # Reorder the variables
-resMA <- resMA %>% select(blocksize, 1:6)
+resMAmbb <- resMAmbb %>% select(blocksize, 1:6)
 
 # Export the data frame of results
-write.csv(resMA, "./data/resMA.csv", row.names = FALSE)
+write.csv(resMAmbb, "./data/resMAmbb.csv", row.names = FALSE)
 
 ## ------------------------------------------------------------------
 ## AR Simulation
@@ -38,21 +38,21 @@ write.csv(resMA, "./data/resMA.csv", row.names = FALSE)
 
 # AR simulation with 500 Monte Carlo replicates and save the time
 start_time <- Sys.time()
-resAR <- lapply(1:10, FUN = mbbARsim, n = 400, M = 500, K = 1000)
+resARmbb <- lapply(1:10, FUN = mbbARsim, n = 400, M = 500, K = 1000)
 end_time <- Sys.time()
 timeAR <- end_time - start_time
 
 # Convert the results into a dataframe
-resAR <- plyr::ldply(resAR, data.frame)
+resARmbb <- plyr::ldply(resARmbb, data.frame)
 
 # Add a variable for blocksize
-resAR$blocksize <- 1:10
+resARmbb$blocksize <- 1:10
 
 # Reorder the variables
-resAR <- resAR %>% select(blocksize, 1:6)
+resARmbb <- resARmbb %>% select(blocksize, 1:6)
 
 # Export the data frame of results
-write.csv(resAR, "./data/resAR.csv", row.names = FALSE)
+write.csv(resARmbb, "./data/resARmbb.csv", row.names = FALSE)
 
 ## ------------------------------------------------------------------
 ## Export times
