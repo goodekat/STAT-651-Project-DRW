@@ -30,7 +30,7 @@ resMA$blocksize <- 1:10
 resMA <- resMA %>% select(blocksize, 1:6)
 
 # Export the data frame of results
-write.csv(resMA, "./data/resMA.R", row.names = FALSE)
+write.csv(resMA, "./data/resMA.csv", row.names = FALSE)
 
 ## ------------------------------------------------------------------
 ## AR Simulation
@@ -52,7 +52,7 @@ resAR$blocksize <- 1:10
 resAR <- resAR %>% select(blocksize, 1:6)
 
 # Export the data frame of results
-write.csv(resAR, "./data/resAR.R", row.names = FALSE)
+write.csv(resAR, "./data/resAR.csv", row.names = FALSE)
 
 ## ------------------------------------------------------------------
 ## Export times
