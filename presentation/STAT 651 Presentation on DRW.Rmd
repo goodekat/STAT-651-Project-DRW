@@ -4,9 +4,8 @@ author: "Katherine Goode and Shan Yu"
 date: "05/04/2018"
 output:
   beamer_presentation:
-    theme: "CambridgeUS"
+    theme: "Singapore"
     colortheme: "dolphin"
-    fonttheme: "structurebold"
 ---
 
 ```{r setup, include=FALSE}
