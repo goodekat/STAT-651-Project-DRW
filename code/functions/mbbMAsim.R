@@ -16,9 +16,9 @@ mbbMAsim <- function(n, M, K, b){
   
   # Create empty vectors to storing the bootstrap results for means
   # and medians
-  mean_var <- numeric(M)
+  mean_sd <- numeric(M)
   mean_res <- numeric(M)
-  median_var <- numeric(M)
+  median_sd <- numeric(M)
   median_res <- numeric(M)
   
   # Create an empty vector to store the length of the data
@@ -48,8 +48,8 @@ mbbMAsim <- function(n, M, K, b){
     }
     
     # Compute the varianes of the bootstrap means and medians 
-    mean_var[j] <- var(xbar)
-    median_var[j] <- var(med)
+    mean_sd[j] <- sd(xbar)
+    median_sd[j] <- sd(med)
     
     # Determine whether the true mean/median is in the bootstrap 95% confidence interval
     mean_res[j] <- quantile(xbar, probs = 0.025) <= 0 & 0 <= quantile(xbar, probs = 0.975)
@@ -61,10 +61,10 @@ mbbMAsim <- function(n, M, K, b){
   # the mean and median
   results <- data.frame(coverage_mean = sum(mean_res) / M,
                         coverage_median = sum(median_res) / M,
-                        MSE_mean = (1 / M) * sum((mean_var - 0.002)^2),
-                        MSE_median = (1 / M) * sum(median_var - 0.004)^2,
-                        norm_MSE_mean = (1 / M) * sum((((nj * mean_var) / (400 * 0.002)) - 1)^2),
-                        norm_MSE_median = (1 / M) * sum((((nj * median_var) / (400 * 0.004)) - 1)^2))
+                        MSE_mean = (1 / M) * sum((mean_sd - 0.050)^2),
+                        MSE_median = (1 / M) * sum(median_sd - 0.064)^2,
+                        norm_MSE_mean = (1 / M) * sum((((nj * mean_sd) / (400 * 0.050)) - 1)^2),
+                        norm_MSE_median = (1 / M) * sum((((nj * median_sd) / (400 * 0.064)) - 1)^2))
   
   # Return the data frame of results
   return(results)

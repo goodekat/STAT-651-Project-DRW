@@ -33,13 +33,13 @@ for(i in 1:M){
 
 # Monte Carlo approximations to the mean and median of 
 # the MA time series
-mean(MAmeans)
+mean(MAmeans)   # -0.000
 mean(MAmedians) # -0.188
 
 # Monte Carlo approximations to the variance of the mean
 # and median of the MA time series
-var(MAmeans)   # 0.002
-var(MAmedians) # 0.004
+sd(MAmeans)   # 0.050
+sd(MAmedians) # 0.064
 
 ## ----------------------------------------------------------
 ## AR Monte Carlo
@@ -73,6 +73,6 @@ mean(ARmedians) # -0.0004
 
 # Monte Carlo approximations to the variance of the mean
 # and median of the AR time series
-var(ARmeans)   # 0.0099
-var(ARmedians) # 0.0127
+sd(ARmeans)   # 0.0995
+sd(ARmedians) # 0.1128
 
