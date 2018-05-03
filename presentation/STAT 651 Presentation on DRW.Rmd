@@ -23,8 +23,8 @@ We were interested in learning about resampling methods for irregularly spaced t
 The paper:
 \begin{itemize}
 \item Introduces a method that assigns random weights to the irregular time series data 
-\item Incorporates a dependence structure that is similar to the data when assigning weights
-\item Uses the weights when drawing bootstrap samples from the data
+\vspace{0.25cm}
+\item Weights are created using a dependence structure that mimics that of the observed data 
 \end{itemize}
 
 ## Irregular Time Series Data
@@ -47,8 +47,54 @@ Irregular time series data can occur in two ways.
 \includegraphics[height = 0.8cm]{./images/unequal}
 \end{center}
 
-## Dependent Random Weighting
+## Dependent Random Weighting (the process)
 ...
 
-## Simulation
+## Dependent Random Weighting (theorems)
+...
+
+## Dependent Random Weighting (their simulations)
+...
+
+## Our Simulations: Overview
+
+We wanted to apply and compare DRW to methods learned in STAT 651. We decided to compare the following situations.
+
+\begin{itemize}
+\item \textbf{Methods}: DRW versus MBB
+\vspace{0.25cm}
+\item \textbf{Data}: MA versus AR time series
+\vspace{0.25cm}
+\item \textbf{Estimators}: mean versus median
+\vspace{0.25cm}
+\item \textbf{Bandwidth}: blocksize versus $l$-dependence
+\end{itemize}
+
+Note on irregular data type:
+\begin{itemize}
+\item Paper used unequal time intervals (type 2)
+\vspace{0.25cm}
+\item We used equal time intervals with missing values (type 1)
+\end{itemize}
+
+## Our Simulations: The Setup
+
+In our simulations, we set...
+
+\begin{itemize}
+\item $n=200$
+\item $M=500$
+\item $K=1000$ 
+\end{itemize}
+
+## Our Simulations: Results for Means
+...
+
+## Our Simulations: Results for Medians
+...
+
+## Our Simulations: Results for Computing Time
+...
+
+## Conclusion
 ...
