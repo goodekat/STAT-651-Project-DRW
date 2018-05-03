@@ -47,13 +47,13 @@ Irregular time series data can occur in two ways.
 \includegraphics[height = 0.8cm]{./images/unequal}
 \end{center}
 
+## Dependent Random Weighting (why it is useful)
+...
+
 ## Dependent Random Weighting (the process)
 ...
 
 ## Dependent Random Weighting (theorems)
-...
-
-## Dependent Random Weighting (their simulations)
 ...
 
 ## Our Simulations: Overview
