@@ -1,8 +1,8 @@
 ## STAT 651 FINAL PROJECT - DEPENDENT RANDOM WEIGHTING
-## Code for DRW simulation for the mean
+## Code for DRW simulation
 rm(list = ls())
 source("./code/functions/DRW.R")
-source("./code/functions/genMAirr.R")
+source("./code/functions/genARirr.R")
 library('parallel')
 # Set a seed
 set.seed(200)
@@ -29,7 +29,7 @@ DRW_simulation=function(M, K, l){
     set.seed(j)
     
     # Generate the irregular data
-    dataMA <- genMAirr(n = 400, parm = c(-1, 0.7))
+    dataMA <- genARirr(n = 400, parm =c(-0.1, 0.6))
     X=dataMA$X
     
     # Create empty vectors to store bootstrap statistics
@@ -62,11 +62,11 @@ DRW_simulation=function(M, K, l){
   coverage_median <- sum(med_res) / M
   
   # MSE for variance of the sampling distribution of the mean
-  meanMSE_v1 <- sum(((mean_var1)/sqrt(0.002454288)/400/20-1)^2) / M
-  medianMSE_v1 <- sum(((med_var1)/sqrt(0.004135431)/400/20-1)^2) / M
+  meanMSE_v1 <- sum(((mean_var1)/0.0995/400/20-1)^2) / M
+  medianMSE_v1 <- sum(((med_var1)/0.1128/400/20-1)^2) / M
   
-  meanMSE_v2 <- sum((mean_var2-sqrt(0.002454288)*20)^2) / M
-  medianMSE_v2 <- sum((med_var2-sqrt(0.004135431)*20)^2) / M
+  meanMSE_v2 <- sum((mean_var2-0.0995*20)^2) / M
+  medianMSE_v2 <- sum((med_var2-0.1128*20)^2) / M
   
   # return the results
   c(coverage_mean,coverage_median,meanMSE_v1,medianMSE_v1,meanMSE_v2,
@@ -77,7 +77,7 @@ DRW_simulation=function(M, K, l){
 result=mclapply(1:10,DRW_simulation,mc.cores=16,M=500,K=1000)
 result=do.call(rbind,result)
 
-write.csv(result, "./data/resMA_DRW.csv", row.names = FALSE)
+write.csv(result, "./data/resAR_DRW.csv", row.names = FALSE)
 
 # draw the cdf for median
 # t<-seq(-5,5,.01)

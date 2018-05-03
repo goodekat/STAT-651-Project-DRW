@@ -4,7 +4,7 @@
 # library needed library
 library('MASS')
 
-DRW_bootstrap=function(X,t,l=5,D){
+DRW_bootstrap=function(X,t,l=5){
   # sample size
   n=length(X)
   
