@@ -7,30 +7,8 @@ library(dplyr)
 library(ggplot2)
 
 # Source in the functions for performing the simulations
-source("./code/functions/mbbMAsim.R")
 source("./code/functions/mbbARsim.R")
-
-## ------------------------------------------------------------------
-## MA Simulation
-## ------------------------------------------------------------------
-
-# MA simulation with 500 Monte Carlo replicates and save the time
-start_time <- Sys.time()
-resMAmbb <- lapply(1:10, FUN = mbbMAsim, n = 400, M = 500, K = 1000)
-end_time <- Sys.time()
-timeMA <- end_time - start_time
-
-# Convert the results into a dataframe
-resMAmbb <- plyr::ldply(resMAmbb, data.frame)
-
-# Add a variable for blocksize
-resMAmbb$blocksize <- 1:10
-
-# Reorder the variables
-resMAmbb <- resMAmbb %>% select(blocksize, 1:6)
-
-# Export the data frame of results
-write.csv(resMAmbb, "./data/resMAmbb.csv", row.names = FALSE)
+source("./code/functions/mbbMAsim.R")
 
 ## ------------------------------------------------------------------
 ## AR Simulation
@@ -55,8 +33,30 @@ resARmbb <- resARmbb %>% select(blocksize, 1:6)
 write.csv(resARmbb, "./data/resARmbb.csv", row.names = FALSE)
 
 ## ------------------------------------------------------------------
+## MA Simulation
+## ------------------------------------------------------------------
+
+# MA simulation with 500 Monte Carlo replicates and save the time
+start_time <- Sys.time()
+resMAmbb <- lapply(1:10, FUN = mbbMAsim, n = 400, M = 500, K = 1000)
+end_time <- Sys.time()
+timeMA <- end_time - start_time
+
+# Convert the results into a dataframe
+resMAmbb <- plyr::ldply(resMAmbb, data.frame)
+
+# Add a variable for blocksize
+resMAmbb$blocksize <- 1:10
+
+# Reorder the variables
+resMAmbb <- resMAmbb %>% select(blocksize, 1:6)
+
+# Export the data frame of results
+write.csv(resMAmbb, "./data/resMAmbb.csv", row.names = FALSE)
+
+## ------------------------------------------------------------------
 ## Export times
 ## ------------------------------------------------------------------
 
 # Export the times it took to run the simulations in a data frame
-write.csv(data.frame(MA = timeMA, AR = timeAR), "./data/mbbtimes.csv", row.names = FALSE)
+write.csv(data.frame(AR = timeAR, MA = timeMA), "./data/mbbtimes.csv", row.names = FALSE)
