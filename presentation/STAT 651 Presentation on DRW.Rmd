@@ -82,13 +82,13 @@ Note on irregular data type:
 We used the following procedure for our simulations.
 
 \begin{enumerate}
-\item \textbf{Generate irregular time series of size $n=200$.}
+\item \textbf{Generate irregular time series of size $n=400$.}
 \vspace{0.25cm}
 \begin{enumerate}
 \item[(i)] Simulate $y_t$ for $t=1,...,n$ from
 \begin{itemize}
 \item an MA process with $\mu=0$, $\theta_1=-1$, and $\theta_2=0.7$ or
-\item an AR process with $\mu=0$, $\phi_1=-0.1$, or $\phi_2=0.6$).
+\item an AR process with $\mu=0$, $\phi_1=-0.1$, or $\phi_2=0.6$.
 \end{itemize}
 \item[(ii)] Assign a weight $\omega_t$ to $y_t$ where
   $$\omega_t=\sin\left(\frac{\pi \cdot t}{n}\right).$$
@@ -117,7 +117,7 @@ for $t=1,...,n$.
 \item[4.] \textbf{Use the distributions of means and medians to compute evaluative measures.}
 \vspace{0.25cm}
 \begin{itemize}
-\item Determine if the 95\% confidence interval contains the true value. (Note: True process medians were approximated using 100,000 Monte Carlo simulations.)
+\item Determine if the 95\% confidence interval contains the true value. (True process medians were approximated using 100,000 Monte Carlo simulations.)
 \vspace{0.1cm}
 \item Compute the standard deviation of the distribution. (Denote this as $\sigma_{n_j}^{(j)}/\sqrt{n_j}$.)
 \end{itemize}
@@ -134,12 +134,11 @@ for $t=1,...,n$.
 \item Coverage rate for both the mean and median
 \vspace{0.1cm}
 \item MSE: 
-  $$\frac{1}{M}\sum_{j=1}^M\left(\frac{\sigma_{n_j}^{(j)}}{\sqrt{n_j}}-
-  \frac{\sigma_n}{\sqrt{n}}\right)^2$$
+  $$\frac{1}{M}\sum_{j=1}^M\left(\sigma_{n_j}^{(j)}-\sigma_n\right)^2$$
 \vspace{0.1cm}
 \item Normalized MSE: 
   $$\frac{1}{M}\sum_{j=1}^M\left(\frac{n_j\sigma_{n_j}^{(j)}}{n\sigma_n}-1\right)^2$$
-\item Note: $\sigma_n=\sqrt{n}Var(\hat{\theta}_n)$ where $\hat{\theta}_n$ is the estimator of interest. $\sigma_n$ was approximated using 100,000 Monte Carlo simulations for both the mean and median.
+\item Note: $\sigma_n=\sqrt{n}Var(\hat{\theta}_n)$, where $\hat{\theta}_n$ is the estimator of interest, was approximated using 100,000 Monte Carlo simulations for both the mean and median.
 \end{itemize}
 \vspace{0.25cm}
 \item[7.] \textbf{Repeat steps 1 to 6 for $\ell=2,...,10$.}
@@ -154,5 +153,5 @@ for $t=1,...,n$.
 ## Our Simulations: Results for Computing Time
 ...
 
-## Conclusion and Ideas for Future Work
+## Conclusion
 ...

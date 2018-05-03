@@ -61,12 +61,12 @@ mbbMAsim <- function(n, M, K, b){
   # the mean and median
   results <- data.frame(coverage_mean = sum(mean_res) / M,
                         coverage_median = sum(median_res) / M,
-                        MSE_mean = (1 / M) * sum((mean_sd - 0.050)^2),
-                        MSE_median = (1 / M) * sum(median_sd - 0.064)^2,
+                        MSE_mean = (1 / M) * sum(((sqrt(nj) * mean_sd) - (sqrt(n) * 0.050))^2),
+                        MSE_median = (1 / M) * sum(((sqrt(nj) * median_sd) - (sqrt(n) * 0.064))^2),
                         norm_MSE_mean = (1 / M) * sum((((nj * sqrt(nj) * mean_sd) / 
-                                                          (400 * sqrt(400) * 0.050)) - 1)^2),
+                                                          (n * sqrt(n) * 0.050)) - 1)^2),
                         norm_MSE_median = (1 / M) * sum((((nj * sqrt(nj) * median_sd) / 
-                                                            (400 * sqrt(400) * 0.064)) - 1)^2))
+                                                            (n * sqrt(n) * 0.064)) - 1)^2))
   
   # Return the data frame of results
   return(results)
