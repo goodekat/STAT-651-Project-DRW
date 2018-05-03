@@ -1,11 +1,10 @@
 ## STAT 651 FINAL PROJECT - DEPENDENT RANDOM WEIGHTING
-## Code for computing Monte Carlo approximation to the 
-## variance of the mean and median of the MA and the AR
-## time series (with no missing observations)
+## Code for creating plots of simulation results
 
 # Load libraries 
 library(tidyverse)
 library(ggplot2)
+library(wesanderson)
 
 ## -----------------------------------------------------------------
 ## Data Steps for Simulation Data
@@ -58,26 +57,21 @@ levels(full_res$statistic) <- c("Coverage Rate", "MSE", "Normalized MSE")
 ## -----------------------------------------------------------------
 
 # Plots of the mean results
+#pdf("./presentation/images/resmean.pdf", height = 4, width = 6)
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = mean_value)) + 
   geom_point(aes(color = method)) + 
   facet_grid(statistic ~ datatype, scale = "free_y") + 
   theme_bw() + 
-  labs(x = "Binwidth/Blocksize", y = "", color = "Method")
+  labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
+  scale_color_manual(values = wes_palette("Zissou"))
+#dev.off()
 
 # Plots of the median results
+#pdf("./presentation/images/resmedian.pdf", height = 4, width = 6)
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = median_value)) + 
   geom_point(aes(color = method)) + 
   facet_grid(statistic ~ datatype, scale = "free_y") + 
   theme_bw() + 
-  labs(x = "Binwidth/Blocksize", y = "", color = "Method")
-
-## -----------------------------------------------------------------
-## Plots of Empirical Distributions
-## -----------------------------------------------------------------
-
-# Plots
-t<-seq(-5,5,.01)
-dis.mmb<-t
-for(i in 1:length(t)){
-  dis.mmb[i]<- length(med[med<= t[i]])/1000}
-plot(t,dis.mmb,lty=3,lwd=2)
+  labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
+  scale_color_manual(values = wes_palette("Zissou"))
+#dev.off()
