@@ -14,13 +14,39 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Introduction
-...
+
+We were interested in learning about resampling methods for irregularly spaced time series data. This led us to read the paper
+
+\begin{quote}
+"The Dependent Random Weighting" (2015) by Srijan Sengupta, Xiaofeng Shao, and Yingchuan Wang.
+\end{quote}
+
+The paper:
+\begin{itemize}
+\item Introduces a method that assigns random weights to the irregular time series data 
+\item Incorporates a dependence structure that is similar to the data when assigning weights
+\item Uses the weights when drawing bootstrap samples from the data
+\end{itemize}
 
 ## Irregular Time Series Data
-...
 
-## Background of Bootstrapping with Irregular Data
-...
+Irregular time series data can occur in two ways.
+
+\vspace{0.25cm}
+
+(1) Missing Values: Time series occurs at equally space intervals but not all data points are observed
+
+\begin{center}
+\includegraphics[height = 0.8cm]{./images/missing}
+\end{center}
+
+\vspace{0.25cm}
+
+(2) Unequal Intervals: Times when the data are observed are generated from a 1-D point process
+
+\begin{center}
+\includegraphics[height = 0.8cm]{./images/unequal}
+\end{center}
 
 ## Dependent Random Weighting
 ...

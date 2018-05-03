@@ -4,6 +4,7 @@
 
 # Libraries 
 library(dplyr)
+library(ggplot2)
 
 # Source in the functions for performing the simulations
 source("./code/functions/mbbMAsim.R")
@@ -21,7 +22,12 @@ timeMA <- end_time - start_time
 
 # Convert the results into a dataframe
 resMA <- plyr::ldply(resMA, data.frame)
-resMA <- resMA %>% rename(blocksize = .id)
+
+# Add a variable for blocksize
+resMA$blocksize <- 1:10
+
+# Reorder the variables
+resMA <- resMA %>% select(blocksize, 1:6)
 
 # Export the data frame of results
 write.csv(resMA, "./data/resMA.R", row.names = FALSE)
@@ -38,7 +44,12 @@ timeAR <- end_time - start_time
 
 # Convert the results into a dataframe
 resAR <- plyr::ldply(resAR, data.frame)
-resAR <- resAR %>% rename(blocksize = .id)
+
+# Add a variable for blocksize
+resAR$blocksize <- 1:10
+
+# Reorder the variables
+resAR <- resAR %>% select(blocksize, 1:6)
 
 # Export the data frame of results
 write.csv(resAR, "./data/resAR.R", row.names = FALSE)
