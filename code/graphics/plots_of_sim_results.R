@@ -38,7 +38,8 @@ resARdrw <- resARdrw %>%
 resMAdrw <- resMAdrw %>%
   mutate(method = rep("DRW", length(blocksize)),
          datatype = rep("MA", length(blocksize))) %>%
-  select(method, datatype, 1:7)
+  select(method, datatype, 1:7) %>%
+  rename(MSE_mean = X)
 
 # Join the AR and MA mbb results
 joinedres <- rbind(resARmbb, resMAmbb, resARdrw, resMAdrw) %>%
@@ -46,7 +47,7 @@ joinedres <- rbind(resARmbb, resMAmbb, resARdrw, resMAdrw) %>%
 
 # Create a separate data frame with mean results
 meanres <- joinedres %>%
-  select(-coverage_median, - MSE_median, -norm_MSE_median, -MSE_mean) %>%
+  select(-coverage_median, -MSE_median, -norm_MSE_median, -MSE_mean) %>%
   rename(coverage = coverage_mean, norm_MSE = norm_MSE_mean) %>%
   gather("statistic", "mean_value", 4:5)
 
@@ -79,7 +80,7 @@ ggplot(full_res, aes(x = factor(blocksize_binwidth), y = mean_value)) +
              aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
   labs(x = "Binwidth/Blocksize", y = "", color = "Method", shape = "Method") +
-  scale_color_manual(values = wes_palette("Zissou"))
+  scale_color_manual(values = wes_palette("Darjeeling"))
 #dev.off()
 
 # Plots of the median results
@@ -91,5 +92,5 @@ ggplot(full_res, aes(x = factor(blocksize_binwidth), y = median_value)) +
              aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
   labs(x = "Binwidth/Blocksize", y = "", color = "Method", shape = "Method") +
-  scale_color_manual(values = wes_palette("Zissou"))
+  scale_color_manual(values = wes_palette("Darjeeling"))
 #dev.off()
