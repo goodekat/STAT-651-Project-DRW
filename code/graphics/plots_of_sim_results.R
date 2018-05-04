@@ -60,7 +60,9 @@ levels(full_res$statistic) <- c("Coverage Rate", "MSE", "Normalized MSE")
 #pdf("./presentation/images/resmean.pdf", height = 4, width = 6)
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = mean_value)) + 
   geom_point(aes(color = method)) + 
-  facet_grid(statistic ~ datatype, scale = "free_y") + 
+  facet_grid(statistic ~ datatype, scale = "free_y") +
+  geom_hline(data = data.frame(yint = 0.95, statistic = "Coverage Rate"),
+             aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
   labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
   scale_color_manual(values = wes_palette("Zissou"))
@@ -71,6 +73,8 @@ ggplot(full_res, aes(x = factor(blocksize_binwidth), y = mean_value)) +
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = median_value)) + 
   geom_point(aes(color = method)) + 
   facet_grid(statistic ~ datatype, scale = "free_y") + 
+  geom_hline(data = data.frame(yint = 0.95, statistic = "Coverage Rate"),
+             aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
   labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
   scale_color_manual(values = wes_palette("Zissou"))
