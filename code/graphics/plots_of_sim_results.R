@@ -32,15 +32,15 @@ joinedres <- rbind(resARmbb, resMAmbb) %>%
 
 # Create a separate data frame with mean results
 meanres <- joinedres %>%
-  select(-coverage_median, - MSE_median, -norm_MSE_median) %>%
-  rename(coverage = coverage_mean, MSE = MSE_mean, norm_MSE = norm_MSE_mean) %>%
-  gather("statistic", "mean_value", 4:6)
+  select(-coverage_median, - MSE_median, -norm_MSE_median, -MSE_mean) %>%
+  rename(coverage = coverage_mean, norm_MSE = norm_MSE_mean) %>%
+  gather("statistic", "mean_value", 4:5)
 
 # Create a separate data frame with median results
 medianres <- joinedres %>%
-  select(-coverage_mean, - MSE_mean, -norm_MSE_mean) %>%
-  rename(coverage = coverage_median, MSE = MSE_median, norm_MSE = norm_MSE_median) %>%
-  gather("statistic", "median_value", 4:6)
+  select(-coverage_mean, - MSE_mean, -norm_MSE_mean, - MSE_median) %>%
+  rename(coverage = coverage_median, norm_MSE = norm_MSE_median) %>%
+  gather("statistic", "median_value", 4:5)
 
 # Join the mean and median results in a dataframe for plotting
 full_res <- full_join(meanres, medianres, 
@@ -50,7 +50,7 @@ full_res <- full_join(meanres, medianres,
 full_res$statistic <- factor(full_res$statistic)
 
 # Change label names for the variable "statistic"
-levels(full_res$statistic) <- c("Coverage Rate", "MSE", "Normalized MSE")
+levels(full_res$statistic) <- c("Coverage Rate", "Normalized MSE")
 
 ## -----------------------------------------------------------------
 ## Plots of Simulation Results
