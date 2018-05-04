@@ -245,8 +245,8 @@ where $\sigma_n=\sqrt{n}Var(\hat{\theta}_n)$ with $\hat{\theta}_n$ denoting the 
 
 We wanted to compare computing times since the paper mentioned that DRW should be easier to implement.
 \begin{itemize}
-\item MBB simulations run on a personal computer
-\item DRW simulations run on the ISU Condo Cluster
+\item MBB simulations run on a personal computer (1 core)
+\item DRW simulations run on the ISU Condo Cluster (10 cores)
 \end{itemize}
 We found that the process took much longer for the DRW than the MBB even when run on a more powerful computer.
 
@@ -270,6 +270,7 @@ MA & 0.41 & 6.48\\
 
 Our simulations provided us with the following information.
 \begin{itemize}
+\item DRW is a new way to conduct bootstrap
 \item DRW results were usually similar or worse than MBB results
 \item DRW took more time than MBB
 \end{itemize}
