@@ -180,9 +180,9 @@ We used the following procedure for our simulations.
 \end{itemize}
 \item[(ii)] Assign a weight $\omega_t$ to $Y_t$ where
   $$\omega_t=\sin\left(\frac{\pi \cdot t}{n}\right).$$
-\item[(iii)] Generate $X_t\sim binomial(\omega_t)$ for $t=1,...,n$.
+\item[(iii)] Generate $Z_t\sim binomial(\omega_t)$ for $t=1,...,n$.
 \item[(iv)] Let
-  $$X_t=\begin{cases} Y_t & \mbox{ if } X_t=1 \\ \mbox{missing} & \mbox{ if } X_t=0
+  $$X_t=\begin{cases} Y_t & \mbox{ if } Z_t=1 \\ \mbox{missing} & \mbox{ if } Z_t=0
   \end{cases}$$
 for $t=1,...,n$.
 \item[(v)] Re-index the non-missing $X_t$ as $X_i$ for $i$ from $1$ to $n_j$ and use as the observed sample.
