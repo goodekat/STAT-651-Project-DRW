@@ -61,14 +61,19 @@ where $\{w(t_i)\}_{i=1}^n$ are the random weights.
 
 ## Dependent Random Weighting
 \begin{itemize}
-\item The bootstrap sample is $$\widehat{\theta}_{n,DRW}^{\ast}=T(F^{\ast}_n).$$
+\item The $b$th random weighted empirical distribution is
+$$F_{n,b}^{\ast}(x)=\sum_{i=1}^nw_b(t_i)I(X_{t_i} \leq x) $$
+where $\{w_b(t_i)\}_{i=1}^n$ are the $b$th realization from $w(t)$.
+\item The bootstrap sample is $$\widehat{\theta}_{n,b,DRW}^{\ast}=T(F^{\ast}_{n,b}).$$
+\item We get $\{\widehat{\theta}_{n,b,DRW}^{\ast}\}_{b=1}^B.$
+\vspace{0.1in}
 \item \textbf{Example:} If we are interest in the marginal expectation of $X_t$, then we have 
-$$\bar{X}_{n,DRW}^{\ast}=\sum_{j=1}^{n}w(t_j)X_{t_j}.$$
+$$\bar{X}_{n,b,DRW}^{\ast}=\sum_{j=1}^{n}w_b(t_j)X_{t_j}.$$
 
 
 \end{itemize}
 
-## Generate Weights
+## Generating Weights
 \vspace{-0.2in}
 \begin{itemize}
 \item Assume the random weights $\{w(t_i)\}_{i=1}^n$ take the form
@@ -77,7 +82,7 @@ $$w(t_i)=\frac{Z(t_i)}{\sum_{i=1}^nZ(t_i)}.$$
 \vspace{0.25cm}
 \item $l$ plays a similar role as the block size in the moving block bootstrap.
 \end{itemize}
-## Generate Weights
+## Generating Weights
 
 \begin{columns}
 \begin{column}{0.5\textwidth}
@@ -118,13 +123,19 @@ $$\left( \begin{array}{cccc}
 
 
 ## Equally Spaced Time Series
+\begin{itemize}
+\item \textbf{Assumption 1.} $\{Z(t)_j\}_{j=1}^n$ are independent of data and a realization of a stationary
+process with $cov(Z(t_j), Z(t_j^{\prime}))=a \{ (t_j-t_j^{\prime})/l\}$, where $a$ is continuous, symmetric and has compact support on $[-1,1]$.
+\item \textbf{Assumption 2.} There exists a $\delta \ge 2 $ such that $\sum_{j=1}^{\infty}\alpha(j)^{\delta/(2+\delta)}< \infty$ and $E\|X_1\|^{2+\delta} < \infty$.
+\item \textbf{Assumption 3.} $\sum_{t_1, t_2, t_3=-\infty}^{\infty}|cum(X_0, X_{t_1}, X_{t_2}, X_{t_3})| \le \infty.$
+\end{itemize}
 
 \textbf{Theorem 1.} Assume that the function $H$ is differentiable in a neighborhood of $\mu$, under the assumptions in paper, then
 \footnotesize{$$
 \sup_{x \in \mathbb{R}}|P[\sqrt{n}\{H(\bar{X}_n)-H(\mu)\} \leq x]-P^{\ast}[\sqrt{n}\{H(\bar{X}_{n,DRW})-H(\bar{X}_n)\}S_Z \leq x]| 
-\to o_p(1).
+\to o_p(1),
 $$}
-
+where $S_Z=E(Z(1))/\sqrt{var(Z(1))}$
 
 ## Irregularly Spaced Time Series
 
