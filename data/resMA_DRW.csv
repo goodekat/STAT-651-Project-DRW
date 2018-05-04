@@ -1,4 +1,4 @@
-blocksize,coverage_mean,coverage_median,MSE_mean,MSE_median,norm_MSE_mean,norm_MSE_median
+blocksize,coverage_mean,coverage_median,norm_MSE_mean,norm_MSE_median,,MSE_median
 1,0.992,0.992,0.215475317,0.049331382,1.595397901,0.331209043
 2,0.962,0.962,0.014601328,0.10415884,0.401767446,0.123234308
 3,0.954,0.954,0.015361466,0.108926548,0.30469051,0.120353241
