@@ -47,6 +47,7 @@ Irregular time series data can occur in two ways.
 \includegraphics[height = 0.8cm]{./images/unequal}
 \end{center}
 
+<<<<<<< HEAD
 ## Dependent Random Weighting (the process)
 \begin{itemize}
 \item A stationary time series $\{X_t\}_{t \in \mathbb{Z}}.$ And the parameter of interest is $\theta=T(F)$, where $T$ is a given function and $F$ is the marginal distribution of $\{X_t\}$.
@@ -80,8 +81,10 @@ $Z(t_i)=(Y(t_i)+c)^2$, where $\{Y(t_i)\}_{i=1}^n \sim N(0,\Sigma)$. $\Sigma$ is 
 \includegraphics[height = 2cm]{./images/BartlettWindor.pdf}
 \end{center}
 \end{itemize}
+## Dependent Random Weighting (why it is useful)
+...
 
-## Dependent Random Weighting (their simulations)
+## Dependent Random Weighting (theorems)
 ...
 
 ## Our Simulations: Overview
@@ -95,7 +98,7 @@ We wanted to apply and compare DRW to methods learned in STAT 651. We decided to
 \vspace{0.25cm}
 \item \textbf{Estimators}: mean versus median
 \vspace{0.25cm}
-\item \textbf{Bandwidth}: blocksize versus $l$-dependence
+\item \textbf{Bandwidth}: block size versus $l$-dependence
 \end{itemize}
 
 Note on irregular data type:
@@ -110,22 +113,22 @@ Note on irregular data type:
 We used the following procedure for our simulations.
 
 \begin{enumerate}
-\item \textbf{Generate irregular time series of size $n=200$.}
+\item \textbf{Generate irregular time series of size $n=400$.}
 \vspace{0.25cm}
 \begin{enumerate}
-\item[(i)] Simulate $y_t$ for $t=1,...,n$ from
+\item[(i)] Simulate $Y_t$ for $t=1,...,n$ from
 \begin{itemize}
-\item an MA process with $\mu=0$, $\theta_1=-1$, and $\theta_2=0.7$ or
-\item an AR process with $\mu=0$, $\phi_1=-0.1$, or $\phi_2=0.6$).
+\item an MA(2) process with $\mu=0$, $\theta_1=-1$, and $\theta_2=0.7$ or
+\item an AR(2) process with $\mu=0$, $\phi_1=-0.1$, or $\phi_2=0.6$.
 \end{itemize}
-\item[(ii)] Assign a weight $\omega_t$ to $y_t$ where
+\item[(ii)] Assign a weight $\omega_t$ to $Y_t$ where
   $$\omega_t=\sin\left(\frac{\pi \cdot t}{n}\right).$$
-\item[(iii)] Generate $z_t\sim binomial(\omega_t)$ for $t=1,...,n$.
+\item[(iii)] Generate $X_t\sim binomial(\omega_t)$ for $t=1,...,n$.
 \item[(iv)] Let
-  $$x_t=\begin{cases} y_t & \mbox{ if } z_t=1 \\ \mbox{missing} & \mbox{ if } z_t=0
+  $$X_t=\begin{cases} Y_t & \mbox{ if } X_t=1 \\ \mbox{missing} & \mbox{ if } X_t=0
   \end{cases}$$
 for $t=1,...,n$.
-\item[(v)] Reindex the non-missing $x_t$ as $x_i$ for $i$ from $1$ to $n_j$ and use as the observed sample.
+\item[(v)] Re-index the non-missing $X_t$ as $X_i$ for $i$ from $1$ to $n_j$ and use as the observed sample.
 \end{enumerate}
 \end{enumerate}
 
@@ -135,9 +138,9 @@ for $t=1,...,n$.
 \item[2.] \textbf{Let $\ell=1$, and apply the resampling method to $K=1000$ samples.}
 \vspace{0.25cm}
 \begin{itemize}
-\item MBB: Draw block bootstrap samples from $x_1,...,x_{n_j}$ with blocks of size $b=\ell$. (ignores missing values)
+\item MBB: Draw block bootstrap samples from $X_1,...,X_{n_j}$ with blocks of size $b=\ell$. (ignores missing values)
 \vspace{0.1cm}
-\item DRW: Randomly assign weights to $x_1,...,x_{n_j}$ using the method from the paper assuming $m$-dependence with $m=\ell$.
+\item DRW: Randomly assign weights to $X_1,...,X_{n_j}$ using the method from the paper assuming $m$-dependence with $m=\ell$.
 \end{itemize}
 \vspace{0.25cm}
 \item[3.] \textbf{Compute the mean and median from the $K$ samples.}
@@ -145,7 +148,7 @@ for $t=1,...,n$.
 \item[4.] \textbf{Use the distributions of means and medians to compute evaluative measures.}
 \vspace{0.25cm}
 \begin{itemize}
-\item Determine if the 95\% confidence interval contains the true value. (Note: True process medians were approximated using 100,000 Monte Carlo simulations.)
+\item Determine if the 95\% confidence interval contains the true value. (True process medians were approximated using 100,000 Monte Carlo simulations.)
 \vspace{0.1cm}
 \item Compute the standard deviation of the distribution. (Denote this as $\sigma_{n_j}^{(j)}/\sqrt{n_j}$.)
 \end{itemize}
@@ -161,26 +164,62 @@ for $t=1,...,n$.
 \begin{itemize}
 \item Coverage rate for both the mean and median
 \vspace{0.1cm}
-\item MSE: 
-  $$\frac{1}{M}\sum_{j=1}^M\left(\frac{\sigma_{n_j}^{(j)}}{\sqrt{n_j}}-
-  \frac{\sigma_n}{\sqrt{n}}\right)^2$$
-\vspace{0.1cm}
 \item Normalized MSE: 
   $$\frac{1}{M}\sum_{j=1}^M\left(\frac{n_j\sigma_{n_j}^{(j)}}{n\sigma_n}-1\right)^2$$
-\item Note: $\sigma_n=\sqrt{n}Var(\hat{\theta}_n)$ where $\hat{\theta}_n$ is the estimator of interest. $\sigma_n$ was approximated using 100,000 Monte Carlo simulations for both the mean and median.
+where $\sigma_n=\sqrt{n}Var(\hat{\theta}_n)$ with $\hat{\theta}_n$ denoting the estimator of interest, was approximated using 100,000 Monte Carlo simulations for both the mean and median
 \end{itemize}
 \vspace{0.25cm}
 \item[7.] \textbf{Repeat steps 1 to 6 for $\ell=2,...,10$.}
 \end{enumerate}
 
 ## Our Simulations: Results for Means
-...
+
+\begin{center}
+\includegraphics[height = 3in]{./images/resmean.pdf}
+\end{center}
 
 ## Our Simulations: Results for Medians
-...
+
+\begin{center}
+\includegraphics[height = 3in]{./images/resmedian.pdf}
+\end{center}
 
 ## Our Simulations: Results for Computing Time
-...
 
-## Conclusion and Ideas for Future Work
-...
+We wanted to compare computing times since the paper mentioned that DRW should be easier to implement.
+\begin{itemize}
+\item MBB simulations run on a personal computer
+\item DRW simulations run on the ISU Condo Cluster
+\end{itemize}
+We found that the process took much longer for the DRW than the MBB even when run on a more powerful computer.
+
+\vspace{0.25cm}
+
+\begin{center}
+\begin{table}
+\begin{tabular}{ccc}
+\hline
+& MBB (personal computer) & DRW (ISU Condo) \\
+\hline
+AR & 24.9 & \\
+MA & 24.6 & \\
+\hline
+\end{tabular}
+\caption{Computing times (in minutes) for full simulation process within a category}
+\end{table}
+\end{center}
+
+## Conclusions
+
+Our simulations provided us with the following information.
+\begin{itemize}
+\item DRW results were...than MBB results
+\item DRW took more computation time than MBB
+\end{itemize}
+
+It would be interesting to run more simulations to consider:
+\begin{itemize}
+\item Would results change if different parameters were used to simulate AR and MA processes?
+\item How would different amounts or locations of missingness affect the results?
+\item Would different sample sizes affect the results?
+\end{itemize}
