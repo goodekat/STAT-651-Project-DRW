@@ -13,6 +13,8 @@ library(wesanderson)
 # Read in data frames with results from simulations
 resARmbb <- read.csv("./data/resARmbb.csv")
 resMAmbb <- read.csv("./data/resMAmbb.csv")
+resARdrw <- read.csv("./data/resAR_DRW.csv")
+resMAdrw <- read.csv("./data/resMA_DRW.csv")
 
 # Add columns for resampling method and data type in resARmbb
 resARmbb <- resARmbb %>%
@@ -26,8 +28,20 @@ resMAmbb <- resMAmbb %>%
          datatype = rep("MA", length(blocksize))) %>%
   select(method, datatype, 1:7)
 
+# Add columns for resampling method and data type in resARmbb
+resARdrw <- resARdrw %>%
+  mutate(method = rep("DRW", length(blocksize)),
+         datatype = rep("AR", length(blocksize))) %>%
+  select(method, datatype, 1:7)
+
+# Add columns for resampling method and data type in resMAmbb
+resMAdrw <- resMAdrw %>%
+  mutate(method = rep("DRW", length(blocksize)),
+         datatype = rep("MA", length(blocksize))) %>%
+  select(method, datatype, 1:7)
+
 # Join the AR and MA mbb results
-joinedres <- rbind(resARmbb, resMAmbb) %>%
+joinedres <- rbind(resARmbb, resMAmbb, resARdrw, resMAdrw) %>%
   rename(blocksize_binwidth = blocksize)
 
 # Create a separate data frame with mean results
@@ -59,23 +73,23 @@ levels(full_res$statistic) <- c("Coverage Rate", "Normalized MSE")
 # Plots of the mean results
 #pdf("./presentation/images/resmean.pdf", height = 4, width = 6)
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = mean_value)) + 
-  geom_point(aes(color = method)) + 
+  geom_point(aes(color = method, shape = method)) + 
   facet_grid(statistic ~ datatype, scale = "free_y") +
   geom_hline(data = data.frame(yint = 0.95, statistic = "Coverage Rate"),
              aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
-  labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
+  labs(x = "Binwidth/Blocksize", y = "", color = "Method", shape = "Method") +
   scale_color_manual(values = wes_palette("Zissou"))
 #dev.off()
 
 # Plots of the median results
 #pdf("./presentation/images/resmedian.pdf", height = 4, width = 6)
 ggplot(full_res, aes(x = factor(blocksize_binwidth), y = median_value)) + 
-  geom_point(aes(color = method)) + 
+  geom_point(aes(color = method, shape = method)) + 
   facet_grid(statistic ~ datatype, scale = "free_y") + 
   geom_hline(data = data.frame(yint = 0.95, statistic = "Coverage Rate"),
              aes(yintercept = yint), linetype = "dotted") +
   theme_bw() + 
-  labs(x = "Binwidth/Blocksize", y = "", color = "Method") +
+  labs(x = "Binwidth/Blocksize", y = "", color = "Method", shape = "Method") +
   scale_color_manual(values = wes_palette("Zissou"))
 #dev.off()

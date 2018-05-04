@@ -201,11 +201,11 @@ We found that the process took much longer for the DRW than the MBB even when ru
 \hline
 & MBB (personal computer) & DRW (ISU Condo) \\
 \hline
-AR & 24.9 & \\
-MA & 24.6 & \\
+AR & 0.42 & 6.63\\
+MA & 0.41 & 6.48\\
 \hline
 \end{tabular}
-\caption{Computing times (in minutes) for full simulation process within a category}
+\caption{Computing times (in hours) for full simulation process within a category}
 \end{table}
 \end{center}
 
@@ -213,13 +213,13 @@ MA & 24.6 & \\
 
 Our simulations provided us with the following information.
 \begin{itemize}
-\item DRW results were...than MBB results
-\item DRW took more computation time than MBB
+\item DRW results were usually similar or worse than MBB results
+\item DRW took more time than MBB
 \end{itemize}
 
 It would be interesting to run more simulations to consider:
 \begin{itemize}
 \item Would results change if different parameters were used to simulate AR and MA processes?
 \item How would different amounts or locations of missingness affect the results?
-\item Would different sample sizes affect the results?
+\item How much would different sample sizes affect the results?
 \end{itemize}
