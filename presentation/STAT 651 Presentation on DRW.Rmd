@@ -48,10 +48,38 @@ Irregular time series data can occur in two ways.
 \end{center}
 
 ## Dependent Random Weighting (the process)
-...
+\begin{itemize}
+\item A stationary time series $\{X_t\}_{t \in \mathbb{Z}}.$ And the parameter of interest is $\theta=T(F)$, where $T$ is a given function and $F$ is the marginal distribution of $\{X_t\}$.
+\vspace{0.25cm}
+\item The estimator of $\theta$ is $\widehat{\theta_n}=T(F_n)$, where $F_n$ is the empirical distribution function based on observations $\{X_{t_j}\}_{j=1}^n$ and $t_j$ are the time points at which the data are observed. 
+\vspace{0.25cm}
+\item The random weighted empirical distribution $F_n^{\ast}$ is defined as 
+$$F_n^{\ast}(x)=\sum_{i=1}^nw(t_i)I(X_{t_i} \leq x),$$
+where $\{w(t_i)\}_{i=1}^n$ are the random weights.
+\end{itemize}
+
+## Dependent Random Weighting
+\begin{itemize}
+\item The bootstrap sample is $$\widehat{\theta}_{n,DRW}^{\ast}=T(F^{\ast}_n).$$
+\item \textbf{Example:} If we are interest in the marginal expectation of $X_t$, then we have 
+$$\bar{X}_{n,DRW}^{\ast}=\sum_{j=1}^{n}w(t_j)X_{t_j}.$$
+
+
+\end{itemize}
 
 ## Dependent Random Weighting (theorems)
-...
+\vspace{-0.2in}
+\begin{itemize}
+\item Assume the random weights $\{w(t_i)\}_{i=1}^n$ take the form
+$$w(t_i)=\frac{Z(t_i)}{\sum_{i=1}^nZ(t_i)}.$$
+\item $Z(t_i)$ are a realization from a \textbf{non-negative} and \textbf{$l-$dependent} process $Z(t),~t \in R$. 
+\vspace{0.25cm}
+\item \textbf{Example:} 
+$Z(t_i)=(Y(t_i)+c)^2$, where $\{Y(t_i)\}_{i=1}^n \sim N(0,\Sigma)$. $\Sigma$ is a $n \times n$ matrix with $\Sigma(i, j)=W\left(\frac{t_i-t_j}{l}\right)$, where $W(\cdot)$ is a symmetric kernel function.
+\begin{center}
+\includegraphics[height = 2cm]{./images/BartlettWindor.pdf}
+\end{center}
+\end{itemize}
 
 ## Dependent Random Weighting (their simulations)
 ...
